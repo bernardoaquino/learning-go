@@ -2,6 +2,15 @@ package main
 
 import "fmt"
 
+type pessoa struct {
+	nome  string
+	idade int
+}
+
+func (p pessoa) oibomdia() {
+	fmt.Println(p.nome, "diz bom dia!")
+}
+
 func main() {
 	// func (receiver) nome(parameters) (returns) { code }
 
@@ -26,6 +35,30 @@ func main() {
 	defer fecharquivo()
 	usaraquivo()
 	*/
+
+	//Métodos(Função anexada a um tipo) - Tipos são tudo - Adiciona funcionalidade a um tipo especificamente
+	mauricio := pessoa{"Maurício", 30}
+	mauricio.oibomdia()
+
+	//Função anônima - Declara e chama ao mesmo tempo
+	x := 10
+	func(x int) {
+		fmt.Println(x * 10)
+	}(x)
+
+	//Funções como expressão
+	y := func(x int) int {
+		return x * 10
+	}
+	fmt.Println(y(x))
+
+	//Função que retorna uma função
+	w := retornaUmaFuncao()
+	z := w(3)
+	fmt.Println(z)
+	fmt.Println(retornaUmaFuncao()(3))
+
+	//Callback passa uma função como argumento
 }
 
 func basica() {
@@ -48,4 +81,10 @@ func soma2(s string, x ...int) (int, int, string) { //Recebe um slice de int - V
 		soma += v
 	}
 	return soma, len(x), s
+}
+
+func retornaUmaFuncao() func(int) int {
+	return func(i int) int {
+		return i * 10
+	}
 }
